@@ -1,97 +1,94 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Приложение для видеозвонков на React Native
 
-# Getting Started
+Приложение на React Native, реализующее функциональность видеозвонков с использованием WebRTC и mediasoup.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Функционал
 
-## Step 1: Start Metro
+- Аутентификация пользователя (симулированная)
+- Авторизация на основе токенов
+- Видеозвонки между двумя пользователями с использованием WebRTC
+- Интеграция с демо-сервером mediasoup
+- Кроссплатформенная поддержка (iOS и Android)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Requirements
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Node.js >= 18
+- Настроенная среда разработки React Native
+- Xcode (для iOS)
+- Android Studio (для Android)
 
-```sh
-# Using npm
-npm start
+## Установка
 
-# OR using Yarn
-yarn start
+1. Склонируйте репозиторий:
+```bash
+git clone <URL-репозитория>
+cd StreamingApp
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+2. Установите зависимости:
+```bash
+npm install
 ```
+
+3. Настройка для iOS:
+```bash
+cd ios
+pod install
+cd ..
+```
+
+## Запуск приложения
 
 ### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android
+```bash
+npm run android
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## Архитектура
 
-## Step 3: Modify your app
+Приложение создано с использованием:
+- React Native с TypeScript
+- Redux Toolkit для управления состоянием
+- React Navigation для маршрутизации
+- react-native-webrtc для функциональности WebRTC
+- mediasoup-client для сигнализации WebRTC
 
-Now that you have successfully run the app, let's make changes!
+### Структура проекта
+```
+src/
+├── navigation/ # Настройка навигации
+├── screens/ # Компоненты экранов
+├── store/ # Хранилище Redux и slices
+└── types/ # Типы TypeScript
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+### Управление состоянием
+- Redux используется для управления состоянием приложения
+- Отдельные срезы (slices) для состояний аутентификации и WebRTC
+- Асинхронные действия для вызовов API и операций WebRTC
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Интеграция с WebRTC
+- Используется демо-сервер mediasoup (v3demo.mediasoup.org)
+- Реализована настройка peer-соединения WebRTC
+- Обработка медиапотоков и разрешений на использование устройств
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Использование
 
-## Congratulations! :tada:
+1. Запустите приложение
+2. Войдите в систему с любым именем пользователя/паролем (аутентификация симулирована)
+3. Введите идентификатор комнаты
+4. Разрешите доступ к камере и микрофону при запросе
+5. Начните видеозвонок
+6. Для тестирования откройте https://v3demo.mediasoup.org в веб-браузере и присоединитесь к той же комнате
 
-You've successfully run and modified your React Native App. :partying_face:
+## Тестирование
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Запустите тесты с помощью:
+```bash
+npm test
+```
